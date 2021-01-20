@@ -1,0 +1,30 @@
+---
+
+- name: showing some facts
+  hosts: all
+  tasks:
+    - name: remove services
+      apt:
+        name:
+          - apache2
+          - vsftpd
+        state: absent
+      when: ansible_os_family == "Debian"
+
+    - name: remove services
+      yum:
+        name:
+          - httpd
+          - vsftpd
+        state: absent
+      when: ansible_os_family == "RedHat"
+
+    - name: remove files
+      file: 
+        path: "{{item}}"
+        state: absent
+      with_items:
+        - /etc/ansible/facts.d
+        - /var/www/html/index.html
+        - /var/ftp/pub/README
+        - /etc/motd

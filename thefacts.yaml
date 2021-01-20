@@ -1,0 +1,16 @@
+---
+
+- name: showing some facts
+  hosts: all
+  tasks:
+    - name: show date
+      debug: var=ansible_facts.date_time.date
+    
+    - name: show date
+      debug: var=ansible_facts['date_time']['time']
+
+    - name: show date
+      debug: var=ansible_date_time['date']
+
+    - name: show date
+      debug: var=ansible_date_time.date
